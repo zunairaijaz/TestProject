@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  purpose: MyText
+  estimated_duration: MyString
+  references=user: MyString
+
+two:
+  title: MyString
+  purpose: MyText
+  estimated_duration: MyString
+  references=user: MyString

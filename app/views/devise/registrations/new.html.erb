@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Test Project</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container" style="margin-left: 300px;">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2 class="text-center" style="margin-left: 100px;">Sign Up</h2><br>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-horizontal", id: "signup-form" }) do |f| %>
+        <div class="form-group">
+          <%= f.label :username, class: "control-label col-sm-3" %>
+          <div class="col-sm-9">
+            <%= f.text_field :username, class: "form-control", autofocus: true %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, class: "control-label col-sm-3" %>
+          <div class="col-sm-9">
+            <%= f.email_field :email, class: "form-control", autocomplete: "email" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :password, class: "control-label col-sm-3" %>
+          <div class="col-sm-9">
+            <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation, class: "control-label col-sm-3" %>
+          <div class="col-sm-9">
+            <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <%= f.label :status, class: "control-label col-sm-3" %>
+          <div class="col-sm-9">
+            <%= f.select :status, options_for_select(['qualified', 'not qualified', 'banned']), { include_blank: true }, { class: "form-control" } %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :user_type, class: "control-label col-sm-3" %>
+          <div class="col-sm-9">
+            <%= f.select :user_type, options_for_select(['Novice', 'Expert']), { include_blank: true }, { class: "form-control", id: "user_user_type" } %>
+          </div>
+        </div>
+        <div id="profession" class="form-group" style="display: none;">
+          <%= f.label :profession, class: "control-label col-sm-3" %>
+          <div class="col-sm-9">
+            <%= f.text_field :profession, class: "form-control" %>
+          </div>
+        </div>
+        <div id="service" class="form-group" style="display: none;">
+          <%= f.label :service, class: "control-label col-sm-3" %>
+          <div class="col-sm-9">
+            <%= f.text_field :service, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <%= f.submit "Sign Up", class: "btn btn-primary btn-lg btn-block" %>
+          </div>
+        </div>
+      <% end %>
+      <div class="col-sm-offset-5 col-sm-5">
+    
+      <%=link_to "Login", new_user_session_path, class: "btn btn-danger btn-lg btn-block" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var userTypeSelect = document.getElementById("user_user_type");
+    var professionField = document.getElementById("profession");
+    var serviceField = document.getElementById("service");
+    
+    userTypeSelect.addEventListener("change", function() {
+      if (userTypeSelect.value === "Expert") {
+        professionField.style.display = "block";
+        serviceField.style.display = "block";
+      } else {
+        professionField.style.display = "none";
+        serviceField.style.display = "none";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

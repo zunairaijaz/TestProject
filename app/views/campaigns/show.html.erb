@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Test Project</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <p>
+        <strong>Title:</strong>
+        <%= @campaign.title %>
+    </p>
+    <p>
+        <strong>Purpose:</strong>
+        <%= @campaign.purpose %>
+    </p>
+    <p>
+        <strong>Estimated Duration:</strong>
+        <%= @campaign.estimated_duration %>
+    </p>
+    <p><strong>User:</strong><%= @campaign.user.username %></p>
+   <%= link_to 'Edit', edit_campaign_path(@campaign), class: 'btn btn-primary' %>
+ 
+   <% if @campaign.todos.present? %>
+  <%= link_to 'View Todo', campaign_todo_path(@campaign, @campaign.todos.first), class: 'btn btn-primary' %>
+<% else %>
+  <p>No todo list found for this campaign.</p>
+  <%= link_to 'Create Todo', new_campaign_todo_path(@campaign), class: 'btn btn-primary' %>
+<% end %>
+  <%= link_to 'View Tags', campaign_tags_path(@campaign), class: 'btn btn-info' %>
+  <%= link_to 'View Discussion Topics', campaign_discussion_topics_path(@campaign), class: 'btn btn-success' %>
+  <% if current_user.novice? && current_user.status=='qualified' %>
+    <%= link_to 'Create Discussion Topic', new_campaign_discussion_topic_path(@campaign), class: 'btn btn-primary' %>
+  <% end %>
+    <% if @campaign.comments.any? %>
+       <div class="comments">
+      <% @campaign.comments.each do |comment| %>
+        <div class="comment">
+          <p><strong><%= comment.user.username %>:</strong> <%= comment.title %></p>
+        </div>
+     <%= link_to 'Delete', campaign_comment_path(@campaign, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+
+      <% end %>
+    </div>
+  <% else %>
+    <p>No comments yet.</p>
+  <% end %>
+
+  <%= form_with(model: [@campaign, Comment.new], url: campaign_comments_path(@campaign), method: :post) do |form| %>
+    <div>
+      <%= form.label :title, "Comment" %>
+      <%= form.text_area :title, class: "form-control" %>
+    </div>
+    <br><%= form.submit "Add Comment", class: "btn btn-primary" %>
+  
+  <% end %>
+  <!-- Button to view discussion topics -->
+  <br><%= link_to 'Back', campaigns_path, class: 'btn btn-default' %>
+
+</div>
+</body>
+</html>

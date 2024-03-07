@@ -1,0 +1,28 @@
+<%= form_for [@campaign, @tag] do |form| %>
+  <% if @tag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+      <ul>
+        <% @tag.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <% if @campaign %>
+    <div class="form-group">
+      <%= form.label :parent_id, "Parent Tag" %>
+      <%= form.collection_select :parent_id, Tag.all, :id, :name, { prompt: true }, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>New Discussion Topic</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h2>Create New Discussion Topic</h2>
+  <%= form_with(model: [@campaign, @discussion_topic], local: true) do |form| %>
+    <% if @discussion_topic.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@discussion_topic.errors.count, "error") %> prohibited this discussion topic from being saved:</h2>
+        <ul>
+          <% @discussion_topic.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+    
+    <%= form.hidden_field :campaign_id, value: @campaign.id %>
+    <%= form.submit 'Create', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+</body>
+</html>

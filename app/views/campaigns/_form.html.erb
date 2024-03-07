@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Test Project</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<%= form_with(model: campaign, html: { id: 'campaign-form' }) do |form| %>
+  <% if campaign.errors.any? %>
+    <div id="error">
+      <h2><%= pluralize(campaign.errors.count, "error") %> Couldn't save this campaign</h2>
+      <ul>
+        <% campaign.errors.full_messages.each do |message| %>
+          <li> <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= form.label :purpose %>
+    <%= form.text_area :purpose, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= form.label :estimated_duration %>
+    <%= form.select :estimated_duration, ['within 1 week', 'within 1 month', 'within 3 months'], {}, class: 'form-control' %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+</body>
+</html>

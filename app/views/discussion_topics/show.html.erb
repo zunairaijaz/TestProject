@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>New Discussion Topic</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1><%= @discussion_topic.title %></h1>
+
+    <% if @discussion_topic.comments.any? %>
+      <h3>Comments</h3>
+      <ul>
+        <% @discussion_topic.comments.each do |comment| %>
+          <li>
+            <strong><%= comment.user.username %>:</strong>
+            <% if comment.respond_to?(:title) %>
+              <%= comment.title %>
+            <% else %>
+              No content available for this comment.
+            <% end %>
+            <%= link_to 'Delete', discussion_topic_comment_path(@discussion_topic, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No comments yet.</p>
+    <% end %>
+
+    <%= form_with(model: [@discussion_topic, Comment.new], url: discussion_topic_comments_path(@discussion_topic), method: :post) do |form| %>
+      <% if form.object.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(form.object.errors.count, "error") %> prohibited this comment from being saved:</h2>
+          <ul>
+            <% form.object.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :title, "Your Comment" %>
+        <%= form.text_area :title, class: "form-control" %>
+      </div>
+
+      <%= form.submit "Submit Comment", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</body>
+</html>

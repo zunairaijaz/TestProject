@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Test Project</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<body>
+<div class="container">
+  <h1>Tags</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.name %></td>
+        <td><%= link_to edit_campaign_tag_path(@campaign, tag), class: 'btn btn-primary' do %>
+          <i class="glyphicon glyphicon-edit"></i> <!-- Edit Icon -->
+        <% end %></td>
+        <td><%= link_to campaign_tag_path(@campaign, tag), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do %>
+          <i class="glyphicon glyphicon-trash"></i> <!-- Delete Icon -->
+        <% end %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Create Tag', new_campaign_tag_path(@campaign), class: 'btn btn-primary' %>
+  <%= link_to 'Back', campaign_path(@campaign), class: 'btn btn-default'  %>
+
+</div>
+</body>
+</html>
