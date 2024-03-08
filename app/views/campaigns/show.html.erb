@@ -36,6 +36,7 @@
   <% if current_user.novice? && current_user.status=='qualified' %>
     <%= link_to 'Create Discussion Topic', new_campaign_discussion_topic_path(@campaign), class: 'btn btn-primary' %>
   <% end %>
+    <h4>Comments</h4>
     <% if @campaign.comments.any? %>
        <div class="comments">
       <% @campaign.comments.each do |comment| %>
