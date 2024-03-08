@@ -10,11 +10,8 @@
 </head>
 <body>
     <h1>Campaigns</h1>
-
 <div class="container">
-
-       <%= link_to 'New Campaign', new_campaign_path, class: 'btn btn-primary' %>
-
+    <%= link_to 'New Campaign', new_campaign_path, class: 'btn btn-primary' %>
     <div class="row">
         <% @campaigns.each do |camp| %>
             <div class="col-sm-4">
@@ -32,6 +29,5 @@
         <% end %>
     </div>
 </div>
-
 </body>
 </html>

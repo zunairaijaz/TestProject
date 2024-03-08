@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates :user_type, inclusion: { in: %w(Novice Expert) }
   validates :status, inclusion: { in: %w(qualified not\ qualified banned) }
   validates :profession, :service, presence: true, if: :expert?
+  enum status: { qualified: 0, not_qualified: 1, banned: 2 } # Define enum values as needed
 
 
   def expert?

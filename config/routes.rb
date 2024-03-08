@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
   }
+  resources :users
 
   resources :discussion_topics do
     resources :comments, only: [:create, :destroy]
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy], module: :discussion_topics
     end
   end
+
+
 
 
   # root "posts#index"

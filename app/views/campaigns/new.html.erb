@@ -9,15 +9,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
-  <h1>New Campaign</h1>
-  <% if policy(Campaign.new).create? %>
-    <%= render 'form', campaign: @campaign %>
-  <% else %>
-    <p>You are not authorized to create a campaign.</p>
-  <% end %>
-  <%= link_to 'Back', campaigns_path, class: 'btn btn-default' %>
-</div>
+ <div class="container">
+   <h1>New Campaign</h1>
+    <% if policy(Campaign.new).create? %>
+       <%= render 'form', campaign: @campaign %>
+    <% else %>
+      <p>You are not authorized to create a campaign.</p>
+    <% end %>
+    <%= link_to 'Back', campaigns_path, class: 'btn btn-default' %>
+ </div>
 <script>
   // Check if the flash message exists and its type is 'notice'
   <% if flash[:notice] %>
