@@ -9,7 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<%= form_with(model: campaign, html: { id: 'campaign-form' }) do |form| %>
+<%= form_with(model: @campaign, html: { id: 'campaign-form', multipart: true }) do |form| %>
   <% if campaign.errors.any? %>
     <div id="error">
       <h2><%= pluralize(campaign.errors.count, "error") %> Couldn't save this campaign</h2>
@@ -37,7 +37,7 @@
     <%= form.file_field :images, multiple: true, class: 'form-control' %>
 
   <% if campaign.images.attached? %>
-    <div class="existing-images"> 
+    <div class="img-responsive"> 
        <% campaign.images.each do |image|%>
       <%= image_tag image.variant(resize_to_limit: [100, 100]) %>
       <% end %>
