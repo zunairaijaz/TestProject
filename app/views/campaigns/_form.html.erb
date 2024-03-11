@@ -36,6 +36,8 @@
     <%= form.label :images %>
     <%= form.file_field :images, multiple: true, class: 'form-control' %>
 
+<%= link_to campaign do %>
+
   <% if campaign.images.attached? %>
     <div class="img-responsive"> 
        <% campaign.images.each do |image|%>
@@ -43,7 +45,7 @@
       <% end %>
     </div>
   <% end %>
-
+<% end %>
   <div class="actions">
     <%= form.submit 'Save', class: 'btn btn-primary' %>
   </div>
