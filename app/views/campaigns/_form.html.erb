@@ -32,6 +32,18 @@
     <%= form.label :estimated_duration %>
     <%= form.select :estimated_duration, ['within 1 week', 'within 1 month', 'within 3 months'], {}, class: 'form-control' %>
   </div>
+  <div class="field">
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true, class: 'form-control' %>
+
+  <% if campaign.images.attached? %>
+    <div class="existing-images"> 
+       <% campaign.images.each do |image|%>
+      <%= image_tag image.variant(resize_to_limit: [100, 100]) %>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= form.submit 'Save', class: 'btn btn-primary' %>
   </div>

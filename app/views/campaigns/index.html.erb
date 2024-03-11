@@ -7,27 +7,41 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Adjust image height and width */
+    .campaign-image {
+      max-width: 100%; /* Set maximum width to 100% */
+      height: auto; /* Allow the image to adjust its height proportionally */
+    }
+    .card-text {
+      word-wrap: break-word; /* Allow the purpose text to wrap onto multiple lines */
+      whitespace: normal;
+    }
+  </style>
 </head>
 <body>
-    <h1>Campaigns</h1>
-<div class="container">
+  <h1>Campaigns</h1>
+  <div class="container">
     <%= link_to 'New Campaign', new_campaign_path, class: 'btn btn-primary' %>
     <div class="row">
-        <% @campaigns.each do |camp| %>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title"><%= camp.title %></h3>
-                        <p class="card-text"><strong>Purpose:</strong> <%= camp.purpose %></p>
-                        <p class="card-text"><strong>Estimated Duration:</strong> <%= camp.estimated_duration %></p>
-                        <%= link_to 'Show', camp, class: 'btn btn-primary' %>
-                        <%= link_to 'Edit', edit_campaign_path(camp), class: 'btn btn-secondary' %>
-                        <%= link_to 'Destroy', camp, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-                    </div>
-                </div>
+      <% @campaigns.each do |campaign| %>
+        <div class="col-md-6 col-lg-4"> <!-- Adjust the column widths here -->
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title"><%= campaign.title %></h3>
+              <% campaign.images.each do |image| %>
+                <%= image_tag image, class: 'campaign-image' %>
+              <% end %>
+              <p class="card-text"><strong>Purpose:</strong> <%= campaign.purpose %></p>
+              <p class="card-text"><strong>Estimated Duration:</strong> <%= campaign.estimated_duration %></p>
+              <%= link_to 'Show', campaign, class: 'btn btn-primary' %>
+              <%= link_to 'Edit', edit_campaign_path(campaign), class: 'btn btn-secondary' %>
+              <%= link_to 'Destroy', campaign, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
             </div>
-        <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-</div>
+  </div>
 </body>
 </html>

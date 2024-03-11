@@ -11,9 +11,15 @@
 <body>
 <div class="container">
     <h1><%= @campaign.title %></h1>
+   <% @campaign.images.each do |image| %>
+      <%= image_tag image, style: "max-width: 100%; height: auto;" %>
+    <% end %>
+
     <p><strong>Purpose:</strong> <%= @campaign.purpose %></p>
     <p><strong>Estimated Duration:</strong><%= @campaign.estimated_duration %></p>
     <p><strong>User:</strong><%= @campaign.user.username %></p>
+        <p><strong>Status:</strong><%= @campaign.user.status %></p>
+
    <%= link_to 'Edit', edit_campaign_path(@campaign), class: 'btn btn-primary' %>
    <% if @campaign.todos.present? %>
    <%= link_to 'View Todo', campaign_todo_path(@campaign, @campaign.todos.first), class: 'btn btn-primary' %>
@@ -23,7 +29,7 @@
   <% end %>
   <%= link_to 'View Tags', campaign_tags_path(@campaign), class: 'btn btn-info' %>
   <%= link_to 'View Discussion Topics', campaign_discussion_topics_path(@campaign), class: 'btn btn-success' %>
-  <% if current_user.novice? && current_user.status=='qualified' %>
+  <% if current_user.novice? && current_user.status =='qualified' %>
   <%= link_to 'Create Discussion Topic', new_campaign_discussion_topic_path(@campaign), class: 'btn btn-primary' %>
   <% end %>
   <h4>Comments</h4>

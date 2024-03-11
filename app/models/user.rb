@@ -10,11 +10,11 @@ class User < ApplicationRecord
   has_many :discussion_topics, through: :campaigns
 
 
-  validates :email, :password, :username, :status, presence: true
+  # validates :email, :password, :username, :status, presence: true
   validates :user_type, inclusion: { in: %w(Novice Expert) }
-  validates :status, inclusion: { in: %w(qualified not\ qualified banned) }
+  # validates :status, presence: true
   validates :profession, :service, presence: true, if: :expert?
-  enum status: { qualified: 0, not_qualified: 1, banned: 2 } # Define enum values as needed
+  enum status: { un_qualified: "un_qualified", qualified: "qualified", banned: "banned" }
 
 
   def expert?
@@ -25,9 +25,9 @@ class User < ApplicationRecord
     user_type == 'Novice'
   end
 
-  def can_change_status?
-    expert?
-  end
+  # def can_change_status?
+  #   expert?
+  # end
 
   def can_create_campaigns?
     expert?

@@ -25,6 +25,9 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+# config/initializers/devise.rb
+config.password_length = 6..128 # Adjust password length requirements if needed
+# config.skip_session_storage = [:http_auth] # Example: skip session storage for certain strategies
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

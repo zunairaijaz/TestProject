@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-  }
-  resources :users
+# config/routes.rb
+devise_for :users, controllers: { registrations: "users/registrations" }
+
+# config/routes.rb
+resources :users
 
   resources :discussion_topics do
     resources :comments, only: [:create, :destroy]
