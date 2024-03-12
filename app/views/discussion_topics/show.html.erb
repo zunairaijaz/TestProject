@@ -29,7 +29,7 @@
       <p>No comments yet.</p>
     <% end %>
 
-    <%= form_with(model: [@discussion_topic, Comment.new], url: discussion_topic_comments_path(@discussion_topic), method: :post) do |form| %>
+    <%= form_with(model: [@discussion_topic, Comment.new], url: campaign_discussion_topic_path(@discussion_topic), method: :post) do |form| %>
       <% if form.object.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(form.object.errors.count, "error") %> prohibited this comment from being saved:</h2>

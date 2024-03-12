@@ -11,7 +11,7 @@
   <h2>Create New Discussion Topic</h2>
   <%= form_with(model: [@campaign, @discussion_topic], local: true) do |form| %>
     <% if @discussion_topic.errors.any? %>
-      <div class="alert alert-danger">
+      <div>
         <h4><%= pluralize(@discussion_topic.errors.count, "error") %> prohibited this discussion topic from being saved:</h4>
         <ul>
           <% @discussion_topic.errors.full_messages.each do |message| %>

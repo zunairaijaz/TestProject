@@ -2,7 +2,7 @@ class DiscussionTopicsController < ApplicationController
   before_action :set_campaign
   before_action :set_discussion_topic, only: [:edit, :update, :destroy]
   before_action :authorize_user, only: [:edit, :update, :destroy]
-before_action :novice_limit, only:[:new, :create]
+  before_action :novice_limit, only:[:new, :create]
   def show
     @discussion_topic = DiscussionTopic.find(params[:id])
     @commentable = @discussion_topic
@@ -28,7 +28,8 @@ def create
   if @discussion_topic.save
     redirect_to campaign_discussion_topics_path(@campaign), notice: 'Discussion topic Created Successfully!.'
   else
-    render :new
+    # redirect_to new_campaign_discussion_topic_path
+    render :new, status: :unprocessable_entity
   end
 end
   def destroy
