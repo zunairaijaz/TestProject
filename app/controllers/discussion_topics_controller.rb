@@ -2,7 +2,7 @@ class DiscussionTopicsController < ApplicationController
   before_action :set_campaign
   before_action :set_discussion_topic, only: [:edit, :update, :destroy]
   before_action :authorize_user, only: [:edit, :update, :destroy]
-
+before_action :novice_limit, only:[:new, :create]
   def show
     @discussion_topic = DiscussionTopic.find(params[:id])
     @commentable = @discussion_topic
@@ -54,4 +54,14 @@ end
   def discussion_topic_params
     params.require(:discussion_topic).permit(:title, :description)
   end
+  def novice_limit
+    return unless current_user.novice?
+    if current_user.discussion_topics.where(campaign_id: @campaign.id).exists?
+      redirect_to campaigns_path, notice: "You can only create one Discussion Topic per campaign."
+    end
+
+  end
+
+
+
 end

@@ -29,9 +29,15 @@
   <% end %>
   <%= link_to 'View Tags', campaign_tags_path(@campaign), class: 'btn btn-info' %>
   <%= link_to 'View Discussion Topics', campaign_discussion_topics_path(@campaign), class: 'btn btn-success' %>
-  <% if current_user.novice? && current_user.status =='qualified' %>
-  <%= link_to 'Create Discussion Topic', new_campaign_discussion_topic_path(@campaign), class: 'btn btn-primary' %>
+<% if current_user.novice? && current_user.status == 'qualified' %>
+  <% if current_user.discussion_topics.where(campaign_id: @campaign.id).exists? %>
+    <p>Discussion topic already created for this campaign.</p>
+  <% else %>
+    <%= link_to 'Create Discussion Topic', new_campaign_discussion_topic_path(@campaign), class: 'btn btn-primary' %>
   <% end %>
+<% end %>
+
+
   <h4>Comments</h4>
     <% if @campaign.comments.any? %>
     <div class="comments">
