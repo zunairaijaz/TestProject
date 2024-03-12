@@ -21,27 +21,27 @@
 </head>
 <body>
   <h1>Campaigns</h1>
-  <div class="container">
-    <%= link_to 'New Campaign', new_campaign_path, class: 'btn btn-primary' %>
-    <div class="row">
-      <% @campaigns.each do |campaign| %>
-        <div class="col-md-6 col-lg-4"> <!-- Adjust the column widths here -->
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title"><%= campaign.title %></h3>
-              <% campaign.images.each do |image| %>
-                <%= image_tag image, class: 'campaign-image' %>
-              <% end %>
-              <p class="card-text"><strong>Purpose:</strong> <%= campaign.purpose %></p>
-              <p class="card-text"><strong>Estimated Duration:</strong> <%= campaign.estimated_duration %></p>
-              <%= link_to 'Show', campaign, class: 'btn btn-primary' %>
-              <%= link_to 'Edit', edit_campaign_path(campaign), class: 'btn btn-secondary' %>
-              <%= link_to 'Destroy', campaign, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+<div class="container ">
+  <%= link_to 'New Campaign', new_campaign_path, class: 'btn btn-primary' %>
+  <div class="row">
+  <% @campaigns.each do |campaign| %>
+    <div class="col-md-6 col-lg-4"> <!-- Adjust the column widths here -->
+    <div class="card mt-3" style="width:350px; height:450px;" >
+        <% campaign.images.each do |image| %>
+          <%= image_tag image, class: 'card-img-top' %>
+        <% end %>
+      <div class="card-body">
+        <h4 class="card-title"><%= campaign.title %></h4>
+        <p class="card-text"><strong>Purpose:</strong> <%= campaign.purpose %></p>
+        <p class="card-text"><strong>Estimated Duration:</strong> <%= campaign.estimated_duration %></p>
+        <%= link_to 'Show', campaign, class: 'btn btn-primary' %>
+        <%= link_to 'Edit', edit_campaign_path(campaign), class: 'btn btn-secondary' %>
+        <%= link_to 'Destroy', campaign, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      </div>
     </div>
-  </div>
+    </div>
+  <% end %>
+</div>
+</div>
 </body>
 </html>
