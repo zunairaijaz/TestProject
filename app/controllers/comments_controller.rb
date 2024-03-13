@@ -39,12 +39,11 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:title)
   end
   def redirect_path
-    if @commentable.is_a?(DiscussionTopic)
-      campaign_path(@commentable)
-    elsif @commentable.is_a?(Campaign)
+    if @commentable.is_a?(DiscussionTopic) || @commentable.is_a?(Campaign)
       campaign_path(@commentable)
     else
       root_path
     end
   end
+
 end
