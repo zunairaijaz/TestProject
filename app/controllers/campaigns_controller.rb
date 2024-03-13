@@ -43,12 +43,18 @@ class CampaignsController < ApplicationController
     end
   end
   # DELETE /campaigns/1
-  def destroy
-    @campaign = Campaign.find(params[:id])
-    authorize @campaign # Authorize destroy action
-    @campaign.destroy
+# DELETE /campaigns/1
+def destroy
+  @campaign = Campaign.find(params[:id])
+  authorize @campaign # Authorize destroy action
+  if @campaign.destroy
     redirect_to campaigns_url, notice: 'Campaign Destroyed Successfully.'
+  else
+    flash[:alert] = 'You are not authorized to perform this action.'
+    redirect_to campaigns_url
   end
+end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_campaign
@@ -56,9 +62,10 @@ class CampaignsController < ApplicationController
     end
     def authorize_user
       unless @campaign.user_id == current_user.id
-        redirect_to campaigns_path(@campaign), alert: 'You are not authorized to perform this action.'
+        flash.now[:alert] = 'You are not authorized to perform this action.'
       end
     end
+
     # Only allow a list of trusted parameters through.
     def campaign_params
       params.require(:campaign).permit(:title, :purpose, :estimated_duration, images: []) # Permit images attribute
