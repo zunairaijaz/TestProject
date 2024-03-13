@@ -9,4 +9,5 @@ class Campaign < ApplicationRecord
 
   validates :title, :purpose, :estimated_duration, presence: true
   validates :estimated_duration, inclusion: { in: ['within 1 week', 'within 1 month', 'within 3 months'] }
+
 end

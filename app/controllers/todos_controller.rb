@@ -8,9 +8,12 @@ class TodosController < ApplicationController
   end
   def new
     @todo = @campaign.todos.build
+    authorize @todo, :new?
+
   end
   def create
     @todo = @campaign.todos.build(todo_params)
+
     if @todo.save
       redirect_to campaign_path(@campaign), notice: "Todo List Created Successfully!"
     else

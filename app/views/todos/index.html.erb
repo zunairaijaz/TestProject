@@ -15,15 +15,14 @@
   <% if @todos.any? %>
     <ul>
       <% @todos.each do |todo| %>
-        <li><%= link_to todo.title, todo %></li>
-        <li><%= link_to todo.description, todo %></li>
+        <li><%= link_to todo.title %></li>
+        <li><%= link_to todo.description %></li>
       <% end %>
     </ul>
   <% else %>
     <p>No todo lists found.</p>
   <% end %>
 
-  <%= link_to 'New Todo List', new_todo_path, class: 'btn btn-primary' %>
 </div>
 </body>
 </html>
