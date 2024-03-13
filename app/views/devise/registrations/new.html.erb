@@ -9,7 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container" style="margin-left: 300px;">
+<div class="container" style="margin-left: 230px;">
   <div class="row">
     <div class="col-sm-6">
       <h2 class="text-center" style="margin-left: 100px;">Sign Up</h2><br>
@@ -78,17 +78,17 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    var userTypeSelect = document.getElementById("user_user_type");
-    var professionField = document.getElementById("profession");
-    var serviceField = document.getElementById("service");
+    var user_type = document.getElementById("user_user_type");
+    var profession = document.getElementById("profession");
+    var service = document.getElementById("service");
     
-    userTypeSelect.addEventListener("change", function() {
-      if (userTypeSelect.value === "Expert") {
-        professionField.style.display = "block";
-        serviceField.style.display = "block";
+    user_type.addEventListener("change", function() {
+      if (user_type.value === "Expert") {
+        profession.style.display = "block";
+        service.style.display = "block";
       } else {
-        professionField.style.display = "none";
-        serviceField.style.display = "none";
+        profession.style.display = "none";
+        service.style.display = "none";
       }
     });
   });
