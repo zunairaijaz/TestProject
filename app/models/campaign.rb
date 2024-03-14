@@ -1,5 +1,6 @@
 # app/models/campaign.rb
 class Campaign < ApplicationRecord
+
   belongs_to :user
   has_many :todos, dependent: :destroy
   has_many :discussion_topics, dependent: :destroy
