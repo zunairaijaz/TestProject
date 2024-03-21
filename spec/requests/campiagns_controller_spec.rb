@@ -6,7 +6,6 @@ RSpec.describe CampaignsController, type: :controller do
     @request.env["devise.mapping"] = Devise.mappings[:user]
     sign_in FactoryBot.create(:user)
   end
-
   describe "POST #create" do
     it "valid attributes create new campaign" do
       campaign_params = FactoryBot.attributes_for(:campaign)
@@ -24,7 +23,6 @@ RSpec.describe CampaignsController, type: :controller do
     it "edit template" do
       campaign=FactoryBot.create(:campaign)
       get :edit , params: {id: campaign.id}
-
     end
   end
   describe "PATCH #update" do

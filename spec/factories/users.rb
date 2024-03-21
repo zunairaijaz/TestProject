@@ -11,5 +11,6 @@ FactoryBot.define do
       user.service = Faker::Company.bs
     end
   end
+
   end
 end
