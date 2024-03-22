@@ -28,10 +28,12 @@ describe "Get #show" do
   end
 end
 describe "POST #create" do
-it "creates a tag" do
-tag_params= FactoryBot.attributes_for(:tag)
-post "/campaigns/#{campaign.id}/tags", params:{tag: tag_params}
-end
+  it "creates a tag" do
+    tag_params= FactoryBot.attributes_for(:tag)
+    post "/campaigns/#{campaign.id}/tags", params:{tag: tag_params}
+    expect(flash[:notice]).to eq('Tag Created Successfully!.')
+
+  end
 end
 describe "PUT #edit" do
   it "renders edit template " do

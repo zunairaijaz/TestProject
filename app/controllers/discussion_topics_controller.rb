@@ -19,19 +19,21 @@ class DiscussionTopicsController < ApplicationController
       render :edit
     end
   end
+
   def new
     @discussion_topic = @campaign.discussion_topics.build
   end
-def create
-  @discussion_topic = @campaign.discussion_topics.build(discussion_topic_params)
-  @discussion_topic.user_id = current_user.id
-  if @discussion_topic.save
-    redirect_to campaign_discussion_topics_path(@campaign), notice: 'Discussion topic Created Successfully!.'
-  else
-    # redirect_to new_campaign_discussion_topic_path
-    render :new, status: :unprocessable_entity
+
+  def create
+    @discussion_topic = @campaign.discussion_topics.build(discussion_topic_params)
+    @discussion_topic.user_id = current_user.id
+    if @discussion_topic.save
+      redirect_to campaign_discussion_topics_path(@campaign), notice: 'Discussion topic Created Successfully!.'
+    else
+      # redirect_to new_campaign_discussion_topic_path
+      render :new, status: :unprocessable_entity
+    end
   end
-end
   def destroy
     @discussion_topic.destroy
     redirect_to campaign_discussion_topics_path(@campaign), notice: 'Discussion topic Destroyed Successfully!.'
@@ -62,7 +64,4 @@ end
     end
 
   end
-
-
-
 end
