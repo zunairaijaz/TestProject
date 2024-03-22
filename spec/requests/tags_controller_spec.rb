@@ -1,54 +1,59 @@
 require 'rails_helper'
 
 RSpec.describe "TagsControllers", type: :request do
-include Devise::Test::IntegrationHelpers
-let(:user) { FactoryBot.create(:user) }
-let(:campaign) { FactoryBot.create(:campaign) }
-let(:tag) { FactoryBot.create(:tag) } # No need to assign a campaign here
+  include Devise::Test::IntegrationHelpers
+  let(:user) { FactoryBot.create(:user) }
+  let(:campaign) { FactoryBot.create(:campaign) }
+  let(:tag) { FactoryBot.create(:tag) }
 
-before(:each) do
-  sign_in user
-end
+  before(:each) do
+    sign_in user
+  end
 
-describe "GET #index" do
-it "renders the index " do
-  get "/campaigns/#{campaign.id}/tags"
+  describe "GET #index" do
+    it "renders the index" do
+      get "/campaigns/#{campaign.id}/tags"
+      expect(response).to render_template :index
+    end
+  end
 
-end
-end
-describe "GET #new" do
+  describe "GET #new" do
     it "renders new template" do
       get "/campaigns/#{campaign.id}/tags/new"
-
+      expect(response).to render_template :new
     end
-end
-describe "Get #show" do
-  it "renders show template" do
-    get "/tags/#{tag.id}"
   end
-end
-describe "POST #create" do
-  it "creates a tag" do
-    tag_params= FactoryBot.attributes_for(:tag)
-    post "/campaigns/#{campaign.id}/tags", params:{tag: tag_params}
-    expect(flash[:notice]).to eq('Tag Created Successfully!.')
 
+
+
+  describe "POST #create" do
+    it "creates a tag" do
+      tag_params = FactoryBot.attributes_for(:tag)
+      expect {
+        post "/campaigns/#{campaign.id}/tags", params: { tag: tag_params }
+      }.to change(Tag, :count).by(1)
+      expect(flash[:notice]).to eq('Tag Created Successfully!.')
+    end
   end
-end
-describe "PUT #edit" do
-  it "renders edit template " do
-  put "/tags/#{tag.id}/edit"
-  end
-end
-describe "PUT #update" do
+
+
+
+  describe "PUT #update" do
   it "updates a tag" do
-  new_name="Updated name"
-  put "/tags/#{tag.id}" , params: {tag: {name: new_name}}
+    new_name = "Updated name"
+    put "/campaigns/#{campaign.id}/tags/#{tag.id}", params: { tag: { name: new_name } }
+    expect(response).to have_http_status(:redirect) # Change from :ok to :redirect
+    expect(tag.reload.name).to eq(new_name)
   end
 end
-describe "DELETE #destroy" do
+
+
+  describe "DELETE #destroy" do
   it "deletes a tag" do
-  delete "/tags/#{tag.id}"
+    tag # Create the tag before deletion
+    expect {
+      delete "/campaigns/#{campaign.id}/tags/#{tag.id}"
+    }.to change(Tag, :count).by(-1)
   end
 end
 end

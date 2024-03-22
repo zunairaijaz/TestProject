@@ -1,3 +1,4 @@
+# config/routes.rb
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :users
@@ -9,5 +10,4 @@ Rails.application.routes.draw do
     resources :todos
     resources :comments, only: [:create, :destroy]
   end
-
 end
