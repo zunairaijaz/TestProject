@@ -36,8 +36,6 @@ RSpec.describe "TagsControllers", type: :request do
     end
   end
 
-
-
   describe "PUT #update" do
   it "updates a tag" do
     new_name = "Updated name"
@@ -46,7 +44,6 @@ RSpec.describe "TagsControllers", type: :request do
     expect(tag.reload.name).to eq(new_name)
   end
 end
-
 
   describe "DELETE #destroy" do
   it "deletes a tag" do

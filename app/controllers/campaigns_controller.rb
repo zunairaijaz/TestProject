@@ -27,18 +27,26 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new(campaign_params)
     @campaign.user = current_user # Associate the current user with the campaign
     authorize @campaign # Authorize create action
+    # binding.pry
     if @campaign.save
       redirect_to @campaign, notice: 'Campaign Created Successfully.'
     else
+      flash.now[:alert] = 'Failed to create campaign: ' + @campaign.errors.full_messages.join(", ")
       render :new
     end
   end
   def update
+
+
     @campaign = Campaign.find(params[:id])
+
     authorize @campaign # Authorize update action
+    binding.pry
     if @campaign.update(campaign_params)
       redirect_to @campaign, notice: 'Campaign Updated Successfully.'
     else
+      flash.now[:alert] = 'Failed to update campaign: ' + @campaign.errors.full_messages.join(", ")
+
       render :edit
     end
   end

@@ -76,7 +76,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem 'shoulda-matchers'
-
+  gem 'rspec-expectations'
 end
 
 gem "pundit", "~> 2.3"

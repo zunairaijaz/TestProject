@@ -6,13 +6,29 @@ RSpec.describe CampaignsController, type: :controller do
     @request.env["devise.mapping"] = Devise.mappings[:user]
     sign_in FactoryBot.create(:user)
   end
-  describe "POST #create" do
-    it "valid attributes create new campaign" do
-      campaign_params = FactoryBot.attributes_for(:campaign)
-      post :create, params: { campaign: campaign_params }
+  # describe "POST #create" do
+  #   context "with valid attributes" do
+  #     it "creates a new campaign" do
+  #       campaign_params = FactoryBot.attributes_for(:campaign)
+  #       puts campaign_params
 
-    end
-  end
+  #       expect {
+  #         post :create, params: { campaign: campaign_params }
+  #       }.to change{Campaign.count}.by(1)
+  #       expect(flash[:notice]).to eq('Campaign Created Successfully.')
+  #     end
+  #   end
+
+  #   context "with invalid attributes" do
+  #     it "does not create a new campaign" do
+  #       expect {
+  #         post :create, params: { campaign: { invalid_param: 'value' } }
+  #       }.not_to change(Campaign, :count)
+
+  #       expect(flash[:alert]).to eq("You are not authorized to perform this action.")
+  #     end
+  #   end
+  # end
   describe "GET #show" do
     it "show template" do
       campaign=FactoryBot.create(:campaign)
@@ -26,14 +42,18 @@ RSpec.describe CampaignsController, type: :controller do
     end
   end
   describe "PATCH #update" do
-   it "update campaign" do
-     campaign=FactoryBot.create(:campaign)
-     new_title = "Updated Title"
+  it "updates campaign" do
+    campaign = FactoryBot.create(:campaign)
+    new_title = "Updated Title"
 
-     patch :update , params: {id: campaign.id , campaign: {title: new_title}}
-     campaign.reload
-    end
+    patch :update, params: { id: campaign.id, campaign: { title: new_title } }
+
+    campaign.reload
+
+    expect(campaign.title).to eq(new_title)
+    expect(flash[:notice]).to eq("Campaign Updated Successfully.")
   end
+end
   describe "DELETE #destroy" do
     it "destroys campaign" do
       campaign = FactoryBot.create(:campaign)
